@@ -3,7 +3,9 @@ import { useRouter } from "next/navigation";
 import LoadingBars from "@/_components/loading-bars";
 import React, { useState } from "react";
 import Link from "next/link";
+import { useAuthStore } from "@/_store/store";
 import { LOGIN_URL } from "@/constants";
+import { User } from "@/_types/user";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -15,6 +17,7 @@ const LoginPage: React.FC = () => {
     password: boolean;
   }>({ email: false, password: false });
   const router = useRouter();
+  const { setUser } = useAuthStore();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,7 +62,7 @@ const LoginPage: React.FC = () => {
         throw new Error(data.message || "Failed to login");
       }
 
-      console.log(data);
+      setUser(data.data.user as User);
       router.push("/");
       setIsLoading(false);
     } catch (err) {
