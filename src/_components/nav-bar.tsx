@@ -1,8 +1,35 @@
 import Link from "next/link";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/_store/store";
+import LoadingBars from "@/_components/loading-bars";
+import { LOGOUT_URL } from "@/constants";
 
 export const NavBar = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { setUser } = useAuthStore();
+  const router = useRouter();
+
+  const handleLogout = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    router.push("/login");
+    const response = await fetch(LOGOUT_URL, {
+      method: "POST",
+      credentials: "include",
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to logout");
+    }
+    setIsLoading(false);
+    setUser(null);
+    router.push("/login");
+  };
+
   return (
     <div className="navbar bg-base-300 shadow-md">
+      {isLoading && <LoadingBars />}
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -24,7 +51,7 @@ export const NavBar = () => {
           </div>
           <ul className="menu menu-sm dropdown-content bg-base-300 rounded-box z-1 mt-3 w-52 p-2 shadow-md">
             <li>
-              <a>Profile</a>
+              <Link href="/profile/user">Profile</Link>
             </li>
             <li>
               <a>Sent Requests</a>
@@ -44,6 +71,17 @@ export const NavBar = () => {
         </Link>
       </div>
       <div className="navbar-end gap-2 mr-8">
+        <div className="bg-white rounded-md">
+          <button
+            type="button"
+            className="btn btn-neutral btn-dash"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+              handleLogout(e)
+            }
+          >
+            Logout
+          </button>
+        </div>
         <button className="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +146,7 @@ export const NavBar = () => {
             </g>
           </svg>
         </label>
-        {/* <button className="btn btn-ghost btn-circle">
+        <button className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -127,7 +165,7 @@ export const NavBar = () => {
             </svg>
             <span className="badge badge-xs badge-primary indicator-item"></span>
           </div>
-        </button> */}
+        </button>
       </div>
     </div>
   );
