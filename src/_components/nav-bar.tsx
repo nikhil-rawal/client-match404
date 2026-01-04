@@ -54,13 +54,13 @@ export const NavBar = () => {
               <Link href="/profile/user">Profile</Link>
             </li>
             <li>
-              <a>Sent Requests</a>
+              <Link href="/user/requests/sent">Sent Requests</Link>
             </li>
             <li>
-              <a>Received Requests</a>
+              <Link href="/user/requests/received">Received Requests</Link>
             </li>
             <li>
-              <a>Connections</a>
+              <Link href="/user/requests/connections">Connections</Link>
             </li>
           </ul>
         </div>
