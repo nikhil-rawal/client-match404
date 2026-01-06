@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import LoadingBars from "@/_components/loading-bars";
 import UserCard from "@/_components/user-card";
@@ -13,7 +13,7 @@ interface Pagination {
   totalPages: number;
 }
 
-const FeedPage: React.FC = () => {
+const FeedContent: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentPage = parseInt(searchParams.get("page") || "1");
@@ -224,6 +224,14 @@ const FeedPage: React.FC = () => {
         )}
       </main>
     </>
+  );
+};
+
+const FeedPage: React.FC = () => {
+  return (
+    <Suspense fallback={<LoadingBars />}>
+      <FeedContent />
+    </Suspense>
   );
 };
 

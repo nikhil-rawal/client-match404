@@ -57,7 +57,7 @@ export interface ConnectionsResponse {
 
 export type FeedUser = Pick<
   User,
-  "_id" | "firstName" | "lastName" | "email" | "phone"
+  "_id" | "firstName" | "lastName" | "createdAt"
 >;
 
 export interface FeedResponse {
