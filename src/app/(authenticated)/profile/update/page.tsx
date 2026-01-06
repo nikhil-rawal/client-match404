@@ -130,10 +130,9 @@ const UpdateProfilePage: React.FC = () => {
       setSuccess("Profile updated successfully!");
       setIsLoading(false);
 
-      // Redirect to profile after 1.5 seconds
       setTimeout(() => {
         router.push("/profile/user");
-      }, 1500);
+      }, 1000);
     } catch (err) {
       setError((err as Error).message);
       setIsLoading(false);

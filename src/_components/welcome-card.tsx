@@ -10,6 +10,10 @@ const WelcomeCard = () => {
         <div className="card-body">
           <h2 className="card-title">Welcome to match404!</h2>
           <p>Hello, {user.firstName}!</p>
+          <Link href="/user/feed">
+            {" "}
+            <button className="btn btn-primary btn-wide">Go to Feed</button>
+          </Link>
         </div>
       ) : (
         <div className="card-body">

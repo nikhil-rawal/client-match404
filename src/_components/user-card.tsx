@@ -4,7 +4,7 @@ const UserCard = ({ user }: { user: User }) => {
   return (
     <div className="card bg-base-300 w-auto shadow-md flex flex-col items-center px-8">
       <div className="card-body">
-        <h2 className="card-title">Your Profile</h2>
+        <h2 className="card-title">{user.firstName} Profile</h2>
         <p>
           Name: {user.firstName} {user.lastName}
         </p>
