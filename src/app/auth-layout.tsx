@@ -15,7 +15,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   useEffect(() => {
     // Only fetch if user is not in store (e.g., on page refresh)
     if (user === null) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/user`, {
+      fetch(`http://localhost:7777/profile/user`, {
         credentials: "include",
       })
         .then((res) => {
