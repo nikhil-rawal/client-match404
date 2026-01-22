@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect } from "react";
 import { useAuthStore } from "@/_store/store";
 import NavBar from "@/_components/nav-bar";

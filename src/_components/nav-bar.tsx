@@ -1,6 +1,5 @@
-import Link from "next/link";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/_store/store";
 import LoadingBars from "@/_components/loading-bars";
 import { LOGOUT_URL } from "@/constants";
@@ -8,12 +7,12 @@ import { LOGOUT_URL } from "@/constants";
 export const NavBar = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useAuthStore();
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleLogout = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    router.push("/login");
+    navigate("/login");
     const response = await fetch(LOGOUT_URL, {
       method: "POST",
       credentials: "include",
@@ -24,7 +23,7 @@ export const NavBar = () => {
     }
     setIsLoading(false);
     setUser(null);
-    router.push("/login");
+    navigate("/login");
   };
 
   return (
@@ -51,22 +50,22 @@ export const NavBar = () => {
           </div>
           <ul className="menu menu-sm dropdown-content bg-base-300 rounded-box z-1 mt-3 w-52 p-2 shadow-md">
             <li>
-              <Link href="/profile/user">Profile</Link>
+              <Link to="/profile/user">Profile</Link>
             </li>
             <li>
-              <Link href="/user/requests/sent">Sent Requests</Link>
+              <Link to="/user/requests/sent">Sent Requests</Link>
             </li>
             <li>
-              <Link href="/user/requests/received">Received Requests</Link>
+              <Link to="/user/requests/received">Received Requests</Link>
             </li>
             <li>
-              <Link href="/user/requests/connections">Connections</Link>
+              <Link to="/user/requests/connections">Connections</Link>
             </li>
           </ul>
         </div>
       </div>
       <div className="navbar-center">
-        <Link href="/" className="btn btn-ghost text-xl">
+        <Link to="/" className="btn btn-ghost text-xl">
           match404
         </Link>
       </div>

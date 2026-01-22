@@ -1,8 +1,6 @@
-"use client";
-import { useRouter } from "next/navigation";
+import { useNavigate, Link } from "react-router-dom";
 import LoadingBars from "@/_components/loading-bars";
 import React, { useState } from "react";
-import Link from "next/link";
 import { SIGNUP_URL } from "@/constants";
 
 const SignupPage: React.FC = () => {
@@ -26,7 +24,7 @@ const SignupPage: React.FC = () => {
     email: false,
     password: false,
   });
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -119,7 +117,7 @@ const SignupPage: React.FC = () => {
       }
 
       console.log(data);
-      router.push("/login");
+      navigate("/login");
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -379,7 +377,7 @@ const SignupPage: React.FC = () => {
             </fieldset>
           </form>
           <div className="flex justify-center items-center mt-4 text-gray-400 hover:text-gray-600">
-            <Link href="/login">
+            <Link to="/login">
               Already have an account? Please Login here!{" "}
             </Link>
           </div>

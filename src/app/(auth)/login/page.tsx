@@ -1,8 +1,6 @@
-"use client";
-import { useRouter } from "next/navigation";
+import { useNavigate, Link } from "react-router-dom";
 import LoadingBars from "@/_components/loading-bars";
 import React, { useState } from "react";
-import Link from "next/link";
 import { useAuthStore } from "@/_store/store";
 import { LOGIN_URL } from "@/constants";
 import { User } from "@/_types/user";
@@ -16,7 +14,7 @@ const LoginPage: React.FC = () => {
     email: boolean;
     password: boolean;
   }>({ email: false, password: false });
-  const router = useRouter();
+  const navigate = useNavigate();
   const { setUser } = useAuthStore();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,7 +61,7 @@ const LoginPage: React.FC = () => {
       }
 
       setUser(data.data.user as User);
-      router.push("/");
+      navigate("/");
       setIsLoading(false);
     } catch (err) {
       setError((err as Error).message);
@@ -184,7 +182,7 @@ const LoginPage: React.FC = () => {
             </fieldset>
           </form>
           <div className="flex justify-center items-center mt-4 text-gray-400 hover:text-gray-600">
-            <Link href="/signup">
+            <Link to="/signup">
               Don&apos;t have an account? Please Register here!{" "}
             </Link>
           </div>

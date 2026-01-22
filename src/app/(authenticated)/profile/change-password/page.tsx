@@ -1,6 +1,5 @@
-"use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 import LoadingBars from "@/_components/loading-bars";
 import { CHANGE_PASSWORD_URL } from "@/constants";
 
@@ -14,7 +13,7 @@ const ChangePasswordPage: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handlePasswordChange = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,7 +59,7 @@ const ChangePasswordPage: React.FC = () => {
       setIsLoading(false);
 
       setTimeout(() => {
-        router.push("/profile/user");
+        navigate("/profile/user");
       }, 1500);
     } catch (err) {
       setError((err as Error).message);
@@ -238,7 +237,7 @@ const ChangePasswordPage: React.FC = () => {
             <button
               type="button"
               className="link link-primary"
-              onClick={() => router.push("/profile/user")}
+              onClick={() => navigate("/profile/user")}
             >
               Back to Profile
             </button>

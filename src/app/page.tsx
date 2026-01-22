@@ -1,5 +1,3 @@
-"use client";
-
 import WelcomeCard from "@/_components/welcome-card";
 
 export default function Home() {

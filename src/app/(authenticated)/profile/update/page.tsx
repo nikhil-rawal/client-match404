@@ -1,8 +1,6 @@
-"use client";
-import { useRouter } from "next/navigation";
+import { useNavigate, Link } from "react-router-dom";
 import LoadingBars from "@/_components/loading-bars";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { useAuthStore } from "@/_store/store";
 import { UPDATE_PROFILE_URL, USER_PROFILE_URL } from "@/constants";
 import { User } from "@/_types/user";
@@ -24,7 +22,7 @@ const UpdateProfilePage: React.FC = () => {
     lastName: false,
     phone: false,
   });
-  const router = useRouter();
+  const navigate = useNavigate();
   const { user, setUser } = useAuthStore();
 
   // Fetch current user data on mount
@@ -131,7 +129,7 @@ const UpdateProfilePage: React.FC = () => {
       setIsLoading(false);
 
       setTimeout(() => {
-        router.push("/profile/user");
+        navigate("/profile/user");
       }, 1000);
     } catch (err) {
       setError((err as Error).message);
@@ -426,7 +424,7 @@ const UpdateProfilePage: React.FC = () => {
           </form>
 
           <div className="mt-4 text-center text-sm">
-            <Link href="/profile/user" className="link link-primary">
+            <Link to="/profile/user" className="link link-primary">
               Back to Profile
             </Link>
           </div>

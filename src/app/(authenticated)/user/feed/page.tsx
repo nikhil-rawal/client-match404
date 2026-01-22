@@ -1,6 +1,5 @@
-"use client";
-import React, { useState, useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import LoadingBars from "@/_components/loading-bars";
 import UserCard from "@/_components/user-card";
 import { FeedUser } from "@/_types/connection";
@@ -14,8 +13,8 @@ interface Pagination {
 }
 
 const FeedContent: React.FC = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const currentPage = parseInt(searchParams.get("page") || "1");
 
   const [users, setUsers] = useState<FeedUser[]>([]);
@@ -64,7 +63,7 @@ const FeedContent: React.FC = () => {
   }, [currentPage]);
 
   const handlePageChange = (newPage: number) => {
-    router.push(`/user/feed?page=${newPage}`);
+    navigate(`/user/feed?page=${newPage}`);
   };
 
   const handleConnectionRequest = async (
@@ -138,7 +137,7 @@ const FeedContent: React.FC = () => {
               No users available at the moment
             </p>
             <button
-              onClick={() => router.push("/")}
+              onClick={() => navigate("/")}
               className="btn btn-outline"
             >
               Go Home
@@ -228,11 +227,7 @@ const FeedContent: React.FC = () => {
 };
 
 const FeedPage: React.FC = () => {
-  return (
-    <Suspense fallback={<LoadingBars />}>
-      <FeedContent />
-    </Suspense>
-  );
+  return <FeedContent />;
 };
 
 export default FeedPage;

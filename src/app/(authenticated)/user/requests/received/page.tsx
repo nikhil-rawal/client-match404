@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import LoadingBars from "@/_components/loading-bars";
 import UserCard from "@/_components/user-card";

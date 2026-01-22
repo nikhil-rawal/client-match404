@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { useAuthStore } from "@/_store/store";
 
 const WelcomeCard = () => {
@@ -10,7 +10,7 @@ const WelcomeCard = () => {
         <div className="card-body">
           <h2 className="card-title">Welcome to match404!</h2>
           <p>Hello, {user.firstName}!</p>
-          <Link href="/user/feed">
+          <Link to="/user/feed">
             {" "}
             <button className="btn btn-primary btn-wide">Go to Feed</button>
           </Link>
@@ -20,10 +20,10 @@ const WelcomeCard = () => {
           <h2 className="card-title">Welcome to match404!</h2>
           <p>Please login or register to continue.</p>
           <div className="card-actions justify-center mt-8">
-            <Link href="/login">
+            <Link to="/login">
               <button className="btn btn-primary">Login</button>
             </Link>
-            <Link href="/signup">
+            <Link to="/signup">
               <button className="btn btn-primary">Register</button>
             </Link>
           </div>
